@@ -21,7 +21,8 @@ public class DrawingBoard extends JPanel implements ActionListener{
           this.apple = wormGame.getApple();
           this.pieceLength = pieceLength;
 
-          timer = new Timer(400,this);
+          int delay = 50;
+          timer = new Timer(delay,this);
      }
 
      @Override

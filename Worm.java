@@ -19,7 +19,7 @@ public class Worm {
           direction = originalDirection;
 
           pieces = new ArrayList<Piece>();
-          Piece piece  = new Piece(originalX,originalY);
+          Piece piece  = new Piece(originalX,originalY,pieceLength);
           pieces.add(piece);
      }
 
@@ -69,7 +69,7 @@ public class Worm {
                shouldGrow = true;
           }
 
-          pieces.add(new Piece(x,y)); // add the new piece to the worm
+          pieces.add(new Piece(x,y,pieceLength)); // add the new piece to the worm
 
           if(shouldGrow) {
                shouldGrow = false; //don't remove a piece if the worm should grow

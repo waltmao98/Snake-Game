@@ -5,7 +5,7 @@ public class Piece {
      private int x;
      private int y;
 
-     public Piece(int x, int y) {
+     public Piece(int x, int y, int pieceLength) {
           this.x = x;
           this.y = y;
      }

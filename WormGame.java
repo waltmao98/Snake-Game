@@ -19,7 +19,7 @@ public class WormGame {
           Random random = new Random();
           int appleX = random.nextInt(frameWidth+1);
           int appleY = random.nextInt(frameHeight+1);
-          apple = new Apple(appleX,appleY);
+          apple = new Apple(appleX,appleY,pieceLength);
      }
 
      public Worm getWorm() {

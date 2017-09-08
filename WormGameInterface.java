@@ -16,8 +16,8 @@ public class WormGameInterface implements Runnable {
 
      public WormGameInterface() {
           Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-          frameWidth = screenSize.width;
-          frameHeight = screenSize.height;
+          frameWidth = screenSize.width * 5 / 6;
+          frameHeight = screenSize.height * 5 / 6;
           pieceLength = frameWidth / 100;
 
           wormGame = new WormGame(frameWidth,frameHeight,pieceLength);
@@ -31,7 +31,7 @@ public class WormGameInterface implements Runnable {
 
          createComponents(frame.getContentPane());
 
-         frame.setBounds(0,0,(frameWidth * 5) / 6, (frameHeight * 5) / 6);
+         frame.setBounds(0,0,frameWidth, frameHeight);
 
          frame.setResizable(false);
 
