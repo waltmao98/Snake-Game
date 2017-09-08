@@ -5,45 +5,45 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class WormGameInterface implements Runnable {
+public class SnakeGameInterface implements Runnable {
 
      private JFrame frame;
-     private WormGame wormGame;
+     private SnakeGame snakeGame;
      private int frameWidth;
      private int frameHeight;
      private int pieceLength;
      private DrawingBoard drawingBoard;
 
 
-     public WormGameInterface() {
+     public SnakeGameInterface() {
           Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
           frameWidth = screenSize.width * 5 / 6;
           frameHeight = screenSize.height * 5 / 6;
           pieceLength = frameWidth / 50;
 
-          wormGame = new WormGame(frameWidth,frameHeight,pieceLength);
-          drawingBoard = new DrawingBoard(wormGame,pieceLength);
+          snakeGame = new SnakeGame(frameWidth,frameHeight,pieceLength);
+          drawingBoard = new DrawingBoard(snakeGame,pieceLength);
           drawingBoard.setBounds(0,0,frameWidth,frameHeight);
-          wormGame.setDrawingBoard(drawingBoard);
+          snakeGame.setDrawingBoard(drawingBoard);
      }
 
      @Override
      public void run() {
-         frame = new JFrame("Worm Game");
+         frame = new JFrame("Snake Game");
 
          frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-         frame.setUndecorated(true);
+         frame.getRootPane().setBorder(BorderFactory.createMatteBorder(0, 4, 4, 4, Color.WHITE));
 
          createComponents(frame.getContentPane());
 
          frame.setBounds(0,0,frameWidth,frameHeight);
-         
+
          frame.setVisible(true);
      }
 
      private void createComponents(Container container) {
           container.add(drawingBoard);
-          frame.addKeyListener(new KeyboardListener(wormGame,drawingBoard));
+          frame.addKeyListener(new KeyboardListener(snakeGame,drawingBoard));
      }
 
 }

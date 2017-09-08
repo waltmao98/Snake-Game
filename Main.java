@@ -2,10 +2,10 @@ import javax.swing.SwingUtilities;
 import java.util.Scanner;
 import java.lang.System;
 
-// entry point to worm game
+// entry point to snake game
 public class Main{
      public static void main(String[] args) {
-          WormGameInterface ui = new WormGameInterface();
+          SnakeGameInterface ui = new SnakeGameInterface();
           SwingUtilities.invokeLater(ui);
 
           // quit program if user types "q"

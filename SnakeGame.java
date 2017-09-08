@@ -2,9 +2,9 @@ import javax.swing.Timer;
 import java.util.Random;
 import java.awt.event.*;
 
-public class WormGame implements ActionListener{
+public class SnakeGame implements ActionListener{
 
-     private Worm worm;
+     private Snake snake;
      private Apple apple;
      private int frameWidth; // width of the frame containing the game
      private int frameHeight; // height of the frame containing the game
@@ -16,13 +16,13 @@ public class WormGame implements ActionListener{
      private int minDelay;
      private int originalDelay;
 
-     public WormGame(int frameWidth, int frameHeight, int pieceLength) {
+     public SnakeGame(int frameWidth, int frameHeight, int pieceLength) {
           this.frameWidth = frameWidth;
           this.frameHeight = frameHeight;
           this.pieceLength = pieceLength;
 
           continueGame = true;
-          worm = new Worm(frameWidth/2,frameHeight/2,Direction.DOWN,pieceLength);
+          snake = new Snake(frameWidth/2,frameHeight/2,Direction.DOWN,pieceLength);
 
           random = new Random();
           int appleX = random.nextInt(frameWidth-pieceLength*3+1) + 2*pieceLength;
@@ -36,8 +36,8 @@ public class WormGame implements ActionListener{
           timer.start();
      }
 
-     public Worm getWorm() {
-          return worm;
+     public Snake getSnake() {
+          return snake;
      }
 
      public Apple getApple() {
@@ -55,35 +55,34 @@ public class WormGame implements ActionListener{
           this.drawingBoard = drawingBoard;
      }
 
-     private void keepWormInBounds() {
-          if(worm.getX() <= 0) {
-               worm.setX(worm.getX() + frameWidth);
+     private void keepSnakeInBounds() {
+          if(snake.getX() <= pieceLength*2) {
+               snake.setX(snake.getX() + frameWidth - pieceLength*2);
           }
-          if(worm.getY() <= 0) {
-               worm.setY(worm.getY() + frameHeight);
+          if(snake.getY() <= pieceLength*2) {
+               snake.setY(snake.getY() + frameHeight - pieceLength*2);
           }
-          if(worm.getX() >= frameWidth) {
-               worm.setX(worm.getX() - frameWidth);
+          if(snake.getX() >= frameWidth-pieceLength*2) {
+               snake.setX(snake.getX() - frameWidth + pieceLength*2);
           }
-          if(worm.getY() >= frameHeight) {
-               worm.setY(worm.getY() - frameHeight);
+          if(snake.getY() >= frameHeight-pieceLength*2) {
+               snake.setY(snake.getY() - frameHeight + pieceLength*2);
           }
      }
 
      @Override
      public void actionPerformed(ActionEvent ae) {
-          timer.setDelay(minDelay+originalDelay/worm.getLength());
-          keepWormInBounds();
-          worm.move();
-          if(worm.runsInto(apple)) {
+          timer.setDelay(minDelay+originalDelay/snake.getLength());
+          keepSnakeInBounds();
+          snake.move();
+          if(snake.runsInto(apple)) {
                resetApple();
-               worm.grow();
+               snake.grow();
           }
-          if(worm.runsIntoItself()) {
+          if(snake.runsIntoItself()) {
                continueGame = false;
           }
           drawingBoard.repaint();
      }
-
 
 }

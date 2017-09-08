@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.*;
 import java.awt.Graphics;
 
-public class Worm {
+public class Snake {
 
      private int pieceLength;
-     private int x; // x position of the head of the worm
-     private int y; // y position of the head of the worm
-     private Direction direction; // direction of the head of the worm
-     private List<Piece> pieces; // list of pieces that make up the worm. Last Piece of the list is the head
-     private boolean shouldGrow; // determines whether or not the worm should grow during the next move()
+     private int x; // x position of the head of the snake
+     private int y; // y position of the head of the snake
+     private Direction direction; // direction of the head of the snake
+     private List<Piece> pieces; // list of pieces that make up the snake. Last Piece of the list is the head
+     private boolean shouldGrow; // determines whether or not the snake should grow during the next move()
      private int frameWidth;
      private int frameHeight;
 
-     public Worm(int originalX, int originalY, Direction originalDirection, int pieceLength) {
+     public Snake(int originalX, int originalY, Direction originalDirection, int pieceLength) {
           this.pieceLength = pieceLength;
 
           x = originalX;
@@ -74,17 +74,17 @@ public class Worm {
                     break;
           }
 
-          // if worm is smaller than 3 pieces, the worm should keep growing
+          // if snake is smaller than 3 pieces, the snake should keep growing
           if(pieces.size() < 3) {
                shouldGrow = true;
           }
 
-          pieces.add(new Piece(x,y,pieceLength)); // add the new piece to the worm
+          pieces.add(new Piece(x,y,pieceLength)); // add the new piece to the snake
 
           if(shouldGrow) {
-               shouldGrow = false; //don't remove a piece if the worm should grow
+               shouldGrow = false; //don't remove a piece if the snake should grow
           } else {
-               pieces.remove(0); //remove the first piece of the list if the worm shouldn't grow
+               pieces.remove(0); //remove the first piece of the list if the snake shouldn't grow
           }
      }
 
@@ -93,17 +93,17 @@ public class Worm {
           shouldGrow = true;
      }
 
-     // check if the piece is on the same position as any Piece of the worm
+     // check if the piece is on the same position as any Piece of the snake
      public boolean runsInto(Piece piece) {
-          for(Piece wormPiece : pieces) {
-               if(wormPiece.runsInto(piece)) {
+          for(Piece snakePiece : pieces) {
+               if(snakePiece.runsInto(piece)) {
                     return true;
                }
           }
           return false;
      }
 
-     // check if any Piece of the worm is on the same position as another Piece of the worm
+     // check if any Piece of the snake is on the same position as another Piece of the snake
      public boolean runsIntoItself() {
           for(int i = 0, len = pieces.size(); i<len-1; ++i) {
                for(int j = i+1; j<len; ++j) {

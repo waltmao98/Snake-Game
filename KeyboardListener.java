@@ -4,14 +4,14 @@ import java.awt.Component;
 
 public class KeyboardListener implements KeyListener {
 
-     private WormGame wormGame;
-     private Worm worm;
+     private SnakeGame snakeGame;
+     private Snake snake;
      private Component component;
 
-     public KeyboardListener(WormGame wormGame, Component component) {
+     public KeyboardListener(SnakeGame snakeGame, Component component) {
           this.component = component;
-          this.wormGame = wormGame;
-          worm = wormGame.getWorm();
+          this.snakeGame = snakeGame;
+          snake = snakeGame.getSnake();
      }
 
      @Override
@@ -20,16 +20,16 @@ public class KeyboardListener implements KeyListener {
           case KeyEvent.VK_ESCAPE:
                System.exit(0);
           case KeyEvent.VK_LEFT:
-               worm.setDirection(Direction.LEFT);
+               snake.setDirection(Direction.LEFT);
                break;
           case KeyEvent.VK_RIGHT:
-               worm.setDirection(Direction.RIGHT);
+               snake.setDirection(Direction.RIGHT);
                break;
           case KeyEvent.VK_UP:
-               worm.setDirection(Direction.UP);
+               snake.setDirection(Direction.UP);
                break;
           case KeyEvent.VK_DOWN:
-               worm.setDirection(Direction.DOWN);
+               snake.setDirection(Direction.DOWN);
                break;
           }
           component.repaint();
