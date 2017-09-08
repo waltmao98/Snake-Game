@@ -51,16 +51,16 @@ public class Worm {
           // change position based on direction
           switch(direction) {
                case UP:
-                    y -= 1;
+                    y -= pieceLength;
                     break;
                case RIGHT:
-                    x += 1;
+                    x += pieceLength;
                     break;
                case DOWN:
-                    y += 1;
+                    y += pieceLength;
                     break;
                case LEFT:
-                    x -= 1;
+                    x -= pieceLength;
                     break;
           }
 

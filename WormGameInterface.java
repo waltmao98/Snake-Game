@@ -18,7 +18,7 @@ public class WormGameInterface implements Runnable {
           Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
           frameWidth = screenSize.width;
           frameHeight = screenSize.height;
-          pieceLength = (frameWidth - 10) / 50;
+          pieceLength = frameWidth / 100;
 
           wormGame = new WormGame(frameWidth,frameHeight,pieceLength);
      }
@@ -28,11 +28,10 @@ public class WormGameInterface implements Runnable {
          frame = new JFrame("Worm Game");
 
          frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
          createComponents(frame.getContentPane());
 
-         frame.setBounds(0,0,frameWidth, frameHeight);
+         frame.setBounds(0,0,(frameWidth * 5) / 6, (frameHeight * 5) / 6);
 
          frame.setResizable(false);
 
@@ -40,7 +39,7 @@ public class WormGameInterface implements Runnable {
      }
 
      private void createComponents(Container container) {
-          DrawingBoard drawingBoard = new DrawingBoard(wormGame.getWorm(),wormGame.getApple(),pieceLength);
+          DrawingBoard drawingBoard = new DrawingBoard(wormGame,pieceLength);
           container.add(drawingBoard);
           frame.addKeyListener(new KeyboardListener(wormGame,drawingBoard));
      }

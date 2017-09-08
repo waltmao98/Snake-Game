@@ -3,18 +3,25 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.event.*;
+import javax.swing.Timer;
 
-public class DrawingBoard extends JPanel {
+public class DrawingBoard extends JPanel implements ActionListener{
 
+     private WormGame wormGame;
      private Worm worm;
      private Apple apple;
      private int pieceLength;
+     private Timer timer;
 
-     public DrawingBoard(Worm worm, Apple apple, int pieceLength) {
+     public DrawingBoard(WormGame wormGame,int pieceLength) {
           super.setBackground(Color.WHITE);
-          this.worm = worm;
-          this.apple = apple;
+          this.wormGame = wormGame;
+          this.worm = wormGame.getWorm();
+          this.apple = wormGame.getApple();
           this.pieceLength = pieceLength;
+
+          timer = new Timer(400,this);
      }
 
      @Override
@@ -22,6 +29,13 @@ public class DrawingBoard extends JPanel {
           super.paintComponent(graphics);
           worm.draw(graphics);
           apple.draw(graphics,pieceLength);
+          timer.start();
+     }
+
+     @Override
+     public void actionPerformed(ActionEvent ae) {
+          wormGame.action();
+          repaint();
      }
 
 }

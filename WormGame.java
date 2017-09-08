@@ -38,7 +38,7 @@ public class WormGame {
           this.apple = apple;
      }
 
-     public void actionPerformed() {
+     public void action() {
           worm.move();
      }
 
