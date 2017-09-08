@@ -10,6 +10,8 @@ public class Worm {
      private Direction direction; // direction of the head of the worm
      private List<Piece> pieces; // list of pieces that make up the worm. Last Piece of the list is the head
      private boolean shouldGrow; // determines whether or not the worm should grow during the next move()
+     private int frameWidth;
+     private int frameHeight;
 
      public Worm(int originalX, int originalY, Direction originalDirection, int pieceLength) {
           this.pieceLength = pieceLength;
@@ -29,6 +31,14 @@ public class Worm {
 
      public int getY() {
           return y;
+     }
+
+     public void setX(int x) {
+          this.x = x;
+     }
+
+     public void setY(int y) {
+          this.y = y;
      }
 
      public Direction getDirection() {
@@ -51,16 +61,16 @@ public class Worm {
           // change position based on direction
           switch(direction) {
                case UP:
-                    y -= pieceLength;
+                    y -= 1.1* pieceLength;
                     break;
                case RIGHT:
-                    x += pieceLength;
+                    x += 1.1* pieceLength;
                     break;
                case DOWN:
-                    y += pieceLength;
+                    y += 1.1* pieceLength;
                     break;
                case LEFT:
-                    x -= pieceLength;
+                    x -= 1.1* pieceLength;
                     break;
           }
 
