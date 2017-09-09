@@ -4,6 +4,8 @@ import java.awt.Graphics;
 
 public class Snake {
 
+     private int originalX;
+     private int originalY;
      private int pieceLength;
      private int x; // x position of the head of the snake
      private int y; // y position of the head of the snake
@@ -15,6 +17,9 @@ public class Snake {
 
      public Snake(int originalX, int originalY, Direction originalDirection, int pieceLength) {
           this.pieceLength = pieceLength;
+
+          this.originalX = originalX;
+          this.originalY = originalY;
 
           x = originalX;
           y = originalY;
@@ -120,4 +125,14 @@ public class Snake {
                graphics.fill3DRect(piece.getX(),piece.getY(),pieceLength,pieceLength,false);
           }
      }
+
+     public void resetSnake() {
+          x = originalX;
+          y = originalY;
+          direction = Direction.DOWN;
+          pieces = new ArrayList<Piece>();
+          Piece piece  = new Piece(originalX,originalY,pieceLength);
+          pieces.add(piece);
+     }
+
 }

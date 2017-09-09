@@ -42,7 +42,11 @@ public class SnakeGameInterface implements Runnable {
      }
 
      private void createComponents(Container container) {
+          BoxLayout layout = new BoxLayout(container, BoxLayout.Y_AXIS);
+          container.setLayout(layout);
+
           container.add(drawingBoard);
+
           frame.addKeyListener(new KeyboardListener(snakeGame,drawingBoard));
      }
 

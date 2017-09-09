@@ -4,6 +4,9 @@ import java.awt.event.*;
 
 public class SnakeGame implements ActionListener{
 
+     private final int minDelay = 10;
+     private final int originalDelay = 300;
+
      private Snake snake;
      private Apple apple;
      private int frameWidth; // width of the frame containing the game
@@ -13,8 +16,6 @@ public class SnakeGame implements ActionListener{
      private Random random; // for setting the apple
      private DrawingBoard drawingBoard;
      private Timer timer;
-     private int minDelay;
-     private int originalDelay;
 
      public SnakeGame(int frameWidth, int frameHeight, int pieceLength) {
           this.frameWidth = frameWidth;
@@ -25,12 +26,9 @@ public class SnakeGame implements ActionListener{
           snake = new Snake(frameWidth/2,frameHeight/2,Direction.DOWN,pieceLength);
 
           random = new Random();
-          int appleX = random.nextInt(frameWidth-pieceLength*3+1) + 2*pieceLength;
-          int appleY = random.nextInt(frameHeight-pieceLength*3+1) + 2*pieceLength;
+          int appleX = random.nextInt(frameWidth-pieceLength*4+1) + pieceLength;
+          int appleY = random.nextInt(frameHeight-pieceLength*4+1) + pieceLength;
           apple = new Apple(appleX,appleY,pieceLength);
-
-          minDelay = 10;
-          originalDelay = 300;
 
           timer = new Timer(minDelay+originalDelay,this);
           timer.start();
@@ -44,9 +42,17 @@ public class SnakeGame implements ActionListener{
           return apple;
      }
 
+     public int getFrameWidth() {
+          return frameWidth;
+     }
+
+     public int getFrameHeight() {
+          return frameHeight;
+     }
+
      public void resetApple() {
-          int appleX = random.nextInt(frameWidth-pieceLength*3+1) + 2*pieceLength;
-          int appleY = random.nextInt(frameHeight-pieceLength*3+1) + 2*pieceLength;
+          int appleX = random.nextInt(frameWidth-pieceLength*4+1) + pieceLength;
+          int appleY = random.nextInt(frameHeight-pieceLength*4+1) + pieceLength;
           apple.setX(appleX);
           apple.setY(appleY);
      }
@@ -80,9 +86,24 @@ public class SnakeGame implements ActionListener{
                snake.grow();
           }
           if(snake.runsIntoItself()) {
-               continueGame = false;
+               stopGame();
           }
           drawingBoard.repaint();
+     }
+
+     private void stopGame() {
+          timer.stop();
+          continueGame = false;
+     }
+
+     public boolean getContinueGame() {
+          return continueGame;
+     }
+
+     public void resetGame() {
+          continueGame = true;
+          snake.resetSnake();
+          timer.start();
      }
 
 }

@@ -16,22 +16,28 @@ public class KeyboardListener implements KeyListener {
 
      @Override
      public void keyPressed(KeyEvent e) {
-     switch(e.getKeyCode()) {
-          case KeyEvent.VK_ESCAPE:
+
+     if(snakeGame.getContinueGame()) {
+          if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
                System.exit(0);
-          case KeyEvent.VK_LEFT:
-               snake.setDirection(Direction.LEFT);
-               break;
-          case KeyEvent.VK_RIGHT:
-               snake.setDirection(Direction.RIGHT);
-               break;
-          case KeyEvent.VK_UP:
-               snake.setDirection(Direction.UP);
-               break;
-          case KeyEvent.VK_DOWN:
-               snake.setDirection(Direction.DOWN);
-               break;
           }
+          if(e.getKeyCode() == KeyEvent.VK_LEFT && snake.getDirection() != Direction.RIGHT) {
+               snake.setDirection(Direction.LEFT);
+          }
+          if(e.getKeyCode() == KeyEvent.VK_RIGHT && snake.getDirection() != Direction.LEFT) {
+               snake.setDirection(Direction.RIGHT);
+          }
+          if(e.getKeyCode() == KeyEvent.VK_UP && snake.getDirection() != Direction.DOWN) {
+               snake.setDirection(Direction.UP);
+          }
+          if(e.getKeyCode() == KeyEvent.VK_DOWN && snake.getDirection() != Direction.UP) {
+               snake.setDirection(Direction.DOWN);
+          }
+     } else {
+          if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+               snakeGame.resetGame();
+          }
+     }
           component.repaint();
      }
 
